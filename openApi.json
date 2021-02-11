@@ -32264,7 +32264,7 @@
                 "deprecated": false
             }
         },
-        "/services/apexrest/Apttus_WebStore/apttus/v1/assets/swap": {
+        "/assets/swap": {
             "post": {
                 "tags": [
                     "Assets"
@@ -32736,7 +32736,7 @@
                 "deprecated": false
             }
         },
-        "/services/apexrest/Apttus_WebStore/apttus/v1/assets/terminate": {
+        "/assets/terminate": {
             "post": {
                 "tags": [
                     "Assets"
@@ -33153,7 +33153,7 @@
                 "deprecated": false
             }
         },
-        "/services/apexrest/Apttus_WebStore/apttus/v1/assets/{assetId}/change": {
+        "/assets/{assetId}/change": {
             "post": {
                 "tags": [
                     "Assets"
