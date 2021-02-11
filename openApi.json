@@ -6227,7 +6227,7 @@
                     {
                         "name": "rule",
                         "in": "query",
-                        "description": "The rule strategy to use. 'default' | 'async' | 'turbo' | 'skip'",
+                        "description": "The rule strategy to use. 'default' | 'async' | 'skip'",
                         "required": true,
                         "style": "form",
                         "explode": true,
@@ -7858,7 +7858,7 @@
                     {
                         "name": "rule",
                         "in": "query",
-                        "description": "The rule strategy to use. 'default' | 'async' | 'turbo' | 'skip'",
+                        "description": "The rule strategy to use. 'default' | 'async' | 'skip'",
                         "required": true,
                         "style": "form",
                         "explode": true,
@@ -13671,7 +13671,7 @@
                     {
                         "name": "price",
                         "in": "query",
-                        "description": "The pricing strategy to use. 'default' | 'async' | 'skip'",
+                        "description": "The pricing strategy to use. 'default' | 'async' |  'turbo' | 'skip'",
                         "required": true,
                         "style": "form",
                         "explode": true,
