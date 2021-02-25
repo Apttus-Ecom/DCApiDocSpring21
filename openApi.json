@@ -51,7 +51,7 @@
                 "tags": [
                     "Catalog"
                 ],
-                "summary": "GetProduct",
+                "summary": "Get Product",
                 "description": "Get product information for the product matching the productId path variable.",
                 "operationId": "GetProduct",
                 "parameters": [
@@ -2886,7 +2886,7 @@
                 "tags": [
                     "Catalog"
                 ],
-                "summary": "GetMultipleProductRules",
+                "summary": "Get Multiple Product Rules",
                 "description": "Get constraint rules for multiple products at once by passing in an array of ids for the products you wish to have returned. Query parameters can be used to create more specific criteria for what is returned.",
                 "operationId": "GetMultipleProductRules",
                 "parameters": [
@@ -3122,7 +3122,7 @@
                 "tags": [
                     "Catalog"
                 ],
-                "summary": "GetProductRules",
+                "summary": "Get Product Rules",
                 "description": "Get the constraint rules associated with the specified product. Query parameters can be used to create more specific criteria for what is returned.",
                 "operationId": "GetProductRules",
                 "parameters": [
@@ -3331,7 +3331,7 @@
                 "tags": [
                     "Catalog"
                 ],
-                "summary": "GetCategories",
+                "summary": "Get Categories",
                 "description": "Gets the category information for the storefront named in the `x-storefront` header. Category information is based on the CPQ configuration on the storefront record you are querying.",
                 "operationId": "GetCategories",
                 "parameters": [
@@ -6111,8 +6111,8 @@
                 "tags": [
                     "Catalog"
                 ],
-                "summary": "SearchForProduct",
-                "description": "Get products  for the products matching the search string.",
+                "summary": "Search For Product",
+                "description": "Get products matching the search string.",
                 "operationId": "SearchForProduct",
                 "parameters": [
                     {
@@ -6208,7 +6208,7 @@
                 "tags": [
                     "Cart Items"
                 ],
-                "summary": "AddOptiontoBundle",
+                "summary": "Add Option to Bundle",
                 "description": "The options post endpoint can be used to add options to an existing cart item.",
                 "operationId": "AddOptiontoBundle",
                 "parameters": [
@@ -6251,7 +6251,7 @@
                     {
                         "name": "cartItemId",
                         "in": "path",
-                        "description": "The reference if of the cart item representing the parent bundle product.",
+                        "description": "The reference of the cart item representing the parent bundle product.",
                         "required": true,
                         "style": "simple",
                         "explode": false,
@@ -7839,8 +7839,8 @@
                 "tags": [
                     "Cart Items"
                 ],
-                "summary": "AddProducttoCart",
-                "description": "The cart items post endpoint can be used to add new line items to an existing cart. This is the most common type of cart action.\nA successful post will return the rules and line items associated with the added product.\n\n> Multiple line items may be returned if the product added is associated with a bundle.\n\n> Pricing for the added product is calculated as an asynchronous process after the product is added and may not be immediatley \n> available on the line item. While pricing is being calculated, the 'IsPricePending' field on the cart will be 'true'.",
+                "summary": "Add Product to Cart",
+                "description": "The cart items post endpoint can be used to add new line items to an existing cart. This is the most common type of cart action.\nA successful post will return the rules and line items associated with the added product.\n\nMultiple line items may be returned if the product added is associated with a bundle.\n\nPricing for the added product is calculated as an asynchronous process after the product is added and may not be immediatley available on the line item. While pricing is being calculated, the 'IsPricePending' field on the cart will be 'true'.",
                 "operationId": "AddProducttoCart",
                 "parameters": [
                     {
@@ -7905,7 +7905,7 @@
                     }
                 ],
                 "requestBody": {
-                    "description": "Request body of Add product to cart\n#### EXAMPLE\n#### [\n {\n \"LineItem\": {\n \"attributes\": {\n \"type\": \"Apttus_Config2__LineItem__c\" \n}, \n \"Apttus_Config2__LineNumber__c\": \"1.0\", \n \"Apttus_Config2__PrimaryLineNumber__c\": \"1.0\", \n \"Apttus_Config2__ItemSequence__c\": 1, \n \"Apttus_Config2__PricingStatus__c\": \"Pending\", \n \"Apttus_Config2__Product__c\": \"01t1T000005BXpfQAG\", \n \"Apttus_Config2__ConfigurationId__c\": \"a1I3I000000e7GLUAY\", \n \"Apttus_Config2__Quantity__C\": 1, \n \"Apttus_Config2__SellingTerm__c\": null \n}, \n \"ProductAttributes\": {\n \"attributes\": {} \n} \n} ]\n####      Another approach of adding request body with single record or an array of records if multiple products is shown below",
+                    "description": "Request body of Add product to cart. \n\nExample 1: Line Item and associated attributes and product attributes. \n\nExample 2: Single product record or an array of products (if multiple). ",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -7923,16 +7923,40 @@
                                     "ProductAttributes": {
                                         "type": "object"
                                     }
+                                }
+                            },
+                            "examples": {
+                                "example1": {
+                                    "summary": "Example 1",
+                                    "value": {
+                                        "LineItem": {
+                                            "attributes": {
+                                                "type": "Apttus_Config2__LineItem__c"
+                                            },
+                                            "Apttus_Config2__LineNumber__c": "1.0",
+                                            "Apttus_Config2__PrimaryLineNumber__c": "1.0",
+                                            "Apttus_Config2__ItemSequence__c": null,
+                                            "Apttus_Config2__PricingStatus__c": "Pending",
+                                            "Apttus_Config2__Product__c": "01t1T000005BXpfQAG",
+                                            "Apttus_Config2__ConfigurationId__c": "a1I3I000000e7GLUAY",
+                                            "Apttus_Config2__Quantity__C": 1,
+                                            "Apttus_Config2__SellingTerm__c": null
+                                        },
+                                        "ProductAttributes": {
+                                            "attributes": {}
+                                        }
+                                    }
                                 },
-                                "example": [
-                                    {
+                                "example2": {
+                                    "summary": "Example 2",
+                                    "value": {
                                         "ProductId": "01t4R00000J5R6i",
                                         "Quantity": 1,
                                         "ProductAttributes": {
                                             "AutoABOPicklist__c": "Option3"
                                         }
                                     }
-                                ]
+                                }
                             }
                         }
                     }
@@ -8741,7 +8765,7 @@
                 "tags": [
                     "Cart Items"
                 ],
-                "summary": "GetCartItem",
+                "summary": "Get Cart Item",
                 "description": "This API can be used to easily retrieve a cart item. The reponse will contain the full details of the associated bundle and rules.",
                 "operationId": "GetCartItem",
                 "parameters": [
@@ -10505,7 +10529,7 @@
                 "tags": [
                     "Cart Items"
                 ],
-                "summary": "UpdateCartItem",
+                "summary": "Update Cart Item",
                 "description": "The cart items put endpoint can be used to update existing line items in a cart.\nA successful put will return the rules and line items associated with the updated product.",
                 "operationId": "UpdateCartItem",
                 "parameters": [
@@ -13043,8 +13067,8 @@
                 "tags": [
                     "Cart Items"
                 ],
-                "summary": "RemoveCartItem",
-                "description": "You can easily remove items from the Cart. A successful Cart item removal request will return any remaining line items and rules associated with the bundle or an empty result for standalone products.\n\n> Multiple line items may be returned if the cart item removed is associated with a bundle.\n\n> Pricing for the added product is calculated as an asynchronous process after the product is added and may not be immediatley \n> available on the line item. While pricing is being calculated, the 'IsPricePending' field on the cart will be 'true'.",
+                "summary": "Remove Cart Item",
+                "description": "You can easily remove items from the Cart. A successful Cart item removal request will return any remaining line items and rules associated with the bundle or an empty result for standalone products.\n\n Multiple line items may be returned if the cart item removed is associated with a bundle.\n\n Pricing for the added product is calculated as an asynchronous process after the product is added and may not be immediatley available on the line item. While pricing is being calculated, the 'IsPricePending' field on the cart will be 'true'.",
                 "operationId": "RemoveCartItem",
                 "parameters": [
                     {
@@ -13664,7 +13688,7 @@
                 "tags": [
                     "Cart Items"
                 ],
-                "summary": "RemoveMultipleCartItems",
+                "summary": "Remove Multiple Cart Items",
                 "description": "You can easily remove items from the Cart. The response will contain the delete status of each item deleted.",
                 "operationId": "RemoveMultipleCartItems",
                 "parameters": [
@@ -13795,8 +13819,8 @@
                 "tags": [
                     "Carts"
                 ],
-                "summary": "GetActiveCart",
-                "description": "You can easily get a new or existing cart by providing the unique cart reference in the request or simply 'active' for the current active cart.\n\n> If 'active' is used and the user hasn't created a cart, a prepopulated cart will be returned with basic header information. This cart will not contain an Id and will be inserted the first time a product is added to the cart.",
+                "summary": "Get Active Cart",
+                "description": "You can easily get a new or existing cart by providing the unique cart reference in the request or simply 'active' for the current active cart.\n\n If 'active' is used and the user hasn't created a cart, a prepopulated cart will be returned with basic header information. This cart will not contain an Id and will be inserted the first time a product is added to the cart.",
                 "operationId": "GetActiveCart",
                 "parameters": [
                     {
@@ -21782,7 +21806,7 @@
                 "tags": [
                     "Carts"
                 ],
-                "summary": "DeleteCart",
+                "summary": "Delete Cart",
                 "description": "Deletes a cart from the database that matches the cartId path variable.",
                 "operationId": "DeleteCart",
                 "parameters": [
@@ -21842,7 +21866,7 @@
                 "tags": [
                     "Carts"
                 ],
-                "summary": "GetCartRules",
+                "summary": "Get Cart Rules",
                 "description": "The following request will return the rules associated with the cart after adding, updating or removing cart items.",
                 "operationId": "GetCartRules",
                 "parameters": [
@@ -21972,7 +21996,7 @@
                 "tags": [
                     "Carts"
                 ],
-                "summary": "CreateCart",
+                "summary": "Create Cart",
                 "description": "This API can be used to easily create a new cart. By default, the newly created cart will be the active cart for the current user.",
                 "operationId": "CreateCart",
                 "parameters": [
@@ -22078,7 +22102,7 @@
                 "tags": [
                     "Carts"
                 ],
-                "summary": "ApplyPromotiontoCart",
+                "summary": "Apply Promotion to Cart",
                 "description": "The Apply Promotion API can be used to apply a coupon code to the specified cart. If the coupon code is applicable, the API will return 'true'.",
                 "operationId": "ApplyPromotiontoCart",
                 "parameters": [
@@ -22184,7 +22208,7 @@
                 "tags": [
                     "Carts"
                 ],
-                "summary": "RemovePromotionfromCart",
+                "summary": "Remove Promotion from Cart",
                 "description": "Removes the specified applied promotion from the cart matching the cartId path variable.",
                 "operationId": "RemovePromotionfromCart",
                 "parameters": [
@@ -22272,7 +22296,7 @@
                 "tags": [
                     "Carts"
                 ],
-                "summary": "PriceCart",
+                "summary": "Price Cart",
                 "description": "Causes a reprice of the cart on the server matching the cartId path variable.",
                 "operationId": "PriceCart",
                 "parameters": [
@@ -22618,7 +22642,7 @@
                 "tags": [
                     "Generic"
                 ],
-                "summary": "Describe",
+                "summary": "Describe Object Metadata",
                 "description": "Completely describes the individual metadata at all levels for the specified object. For example, this can be used to retrieve the fields, URLs, and child relationships for the Account object.",
                 "operationId": "Describe",
                 "parameters": [
@@ -27408,7 +27432,7 @@
                     "Generic"
                 ],
                 "summary": "Query",
-                "description": "The query endpoint can be used to obtained complex result sets for the client application. When using the query endpoint, it is important to keep in mind the limitations of the underlying SOQL and SOSL platforms that power this API. In addition, performance can vary based on the complexity of the query request.Request body should be an object containing the key and value with the following fields as shown in example below",
+                "description": "The query endpoint can be used to obtain complex result sets for the client application. When using the query endpoint, it is important to keep in mind the limitations of the underlying SOQL and SOSL platforms that power this API. In addition, performance can vary based on the complexity of the query request.Request body should be an object containing the key and value with the following fields as shown in example below",
                 "operationId": "Query",
                 "parameters": [
                     {
@@ -27449,7 +27473,7 @@
                     }
                 ],
                 "requestBody": {
-                    "description": "## Body Parameters\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| page | Pagination | - | Pagination Object representing the per page limit and desired page number |\n| sortOrder | Array (Sort) | - | Array of sort objects to sort the result set |\n| cacheStrategy |\"performance\", \"freshness\"| freshness | Desired cache strategy |\n| conditions | Array (Condition) | - | Array of conditions to apply to the query |\n| expressionOperator | \"OR\", \"AND\" | \"AND\" | The expression used to combine conditions and filters |\n| filters | Array (Filter) | - | Array of filters to apply to the query |\n| joins | Array (Join) | - | Array of join objects to apply to the query |\n| lookups | Array (Lookup) | - | Array of lookup fields to populate on the result set |\n| children | Array (Children) | - | Array of child records to populate on the result set |\n| groupBy | List (String) | - | Array of fields to group the result set by\n| aggregate | true / false | false | When set to true, result will return only aggregate data |\n| aggregateFields | Array (AggregateField) | - | List of fields to provide additional aggregate data |\n| searchString | String | - | Query string to search for records based on text input |\n\n## Pagination\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| pageLimit | Number | - | The maximum number of records in the result set |\n| pageNumber | Number | - | The desired page number of the results |\n\n## Sort\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| field | String | - | The desired field to sort the results by |\n| direction | \"ASC\", \"DESC\" | \"ASC\" | The direction to apply to the sorted field |\n\n## Condition\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| field | String | - | The desired field to apply a condition to |\n| filterOperator | Operator | - | The operator to use for the condition (See operators list) |\n| value | String / Number / Boolean | - | The expected value for the condition |\n\n## Filter\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| conditions | Array (Condition) | - | The conditions to apply within the filter |\n| expressionOperator | \"AND\", \"OR\" | \"AND\" | The expression used to combine the conditions |\n| filters | Array (Filter) | - | An array of child filters |\n\n## Join\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| fromAttribute | String | - | The key on the primary table used in the join (Commonly Id) |\n| toAttribute | String | - | The foreign key on the joining table |\n| apiName | String | - | The fully qualified API name of the table to join |\n| conditions | Array (Condition) | - | An array of conditions to apply to the join |\n| filters | Array (Filter) | - | An array of filters to apply to the join |\n| expressionOperator | \"AND\", \"OR\" | \"AND\" | The expression used to combine conditions and filters |\n\n## Lookup\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| field | String | - | The field on the object containing the Id of the reference record |\n| lookups | Array (Lookup) | - | Array of nested lookups to apply to the reference result |\n| children | Array (Children) | - | An array of child data to query on the reference record |\n\n## Children\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| field | String | - | The field on the object referencing the child records |\n| page | Pagination | - | Pagination Object representing the per page limit and desired page number |\n| filters | Array (Filter) | - | Array of filters to apply to the query |\n| sortOrder | Array (Sort) | - | Array of sort objects to sort the result set |\n| lookups | Array (Lookup) | - | Array of lookup fields to populate on the result set |\n| children | Array (Children) | - | Array of child records to populate on the result set |\n\n## Aggregate Field\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| field | String | - | The field to apply an aggregation to |\n| aggregateType | Aggregate Function | - | The aggregate function to use (See aggregate function list) |\n\n#### Operators\n     - Equal        - LessEqual        - Contains        - EndsWith\n     - NotEqual        - GreaterEqual      - DoesNotContain    - DoesNotEndWith\n     - GreaterThan      - Like          - BeginsWith      - In\n     - LessThan        - NotLike        - DoesNotBeginWith    - NotIn\n     - Null          - On          - LastXDays        - NextXDays\n     - NotNull        - Today\n\n#### Aggregate Functions\n     - SUM\n     - MIN\n     - MAX\n     - AVG\n     - COUNT",
+                    "description": "|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| page | Pagination | - | Pagination Object representing the per page limit and desired page number |\n| sortOrder | Array (Sort) | - | Array of sort objects to sort the result set |\n| cacheStrategy |\"performance\", \"freshness\"| freshness | Desired cache strategy |\n| conditions | Array (Condition) | - | Array of conditions to apply to the query |\n| expressionOperator | \"OR\", \"AND\" | \"AND\" | The expression used to combine conditions and filters |\n| filters | Array (Filter) | - | Array of filters to apply to the query |\n| joins | Array (Join) | - | Array of join objects to apply to the query |\n| lookups | Array (Lookup) | - | Array of lookup fields to populate on the result set |\n| children | Array (Children) | - | Array of child records to populate on the result set |\n| groupBy | List (String) | - | Array of fields to group the result set by\n| aggregate | true / false | false | When set to true, result will return only aggregate data |\n| aggregateFields | Array (AggregateField) | - | List of fields to provide additional aggregate data |\n| searchString | String | - | Query string to search for records based on text input |\n\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| pageLimit | Number | - | The maximum number of records in the result set |\n| pageNumber | Number | - | The desired page number of the results |\n\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| field | String | - | The desired field to sort the results by |\n| direction | \"ASC\", \"DESC\" | \"ASC\" | The direction to apply to the sorted field |\n\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| field | String | - | The desired field to apply a condition to |\n| filterOperator | Operator | - | The operator to use for the condition (See operators list) |\n| value | String / Number / Boolean | - | The expected value for the condition |\n\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| conditions | Array (Condition) | - | The conditions to apply within the filter |\n| expressionOperator | \"AND\", \"OR\" | \"AND\" | The expression used to combine the conditions |\n| filters | Array (Filter) | - | An array of child filters |\n\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| fromAttribute | String | - | The key on the primary table used in the join (Commonly Id) |\n| toAttribute | String | - | The foreign key on the joining table |\n| apiName | String | - | The fully qualified API name of the table to join |\n| conditions | Array (Condition) | - | An array of conditions to apply to the join |\n| filters | Array (Filter) | - | An array of filters to apply to the join |\n| expressionOperator | \"AND\", \"OR\" | \"AND\" | The expression used to combine conditions and filters |\n\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| field | String | - | The field on the object containing the Id of the reference record |\n| lookups | Array (Lookup) | - | Array of nested lookups to apply to the reference result |\n| children | Array (Children) | - | An array of child data to query on the reference record |\n\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| field | String | - | The field on the object referencing the child records |\n| page | Pagination | - | Pagination Object representing the per page limit and desired page number |\n| filters | Array (Filter) | - | Array of filters to apply to the query |\n| sortOrder | Array (Sort) | - | Array of sort objects to sort the result set |\n| lookups | Array (Lookup) | - | Array of lookup fields to populate on the result set |\n| children | Array (Children) | - | Array of child records to populate on the result set |\n\n|**Key**|**Type**|**Default**|**Description**|\n|--|--|--|--|\n| field | String | - | The field to apply an aggregation to |\n| aggregateType | Aggregate Function | - | The aggregate function to use (See aggregate function list) |\n\n     - Equal        - LessEqual        - Contains        - EndsWith\n     - NotEqual        - GreaterEqual      - DoesNotContain    - DoesNotEndWith\n     - GreaterThan      - Like          - BeginsWith      - In\n     - LessThan        - NotLike        - DoesNotBeginWith    - NotIn\n     - Null          - On          - LastXDays        - NextXDays\n     - NotNull        - Today\n\n     - SUM\n     - MIN\n     - MAX\n     - AVG\n     - COUNT",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -27607,7 +27631,7 @@
                 "tags": [
                     "Generic"
                 ],
-                "summary": "GetRecord(s)",
+                "summary": "Get Record(s)",
                 "description": "Records can be queried from the system by passing in the name of the object as a rest parameter and query conditions can be specified with various query parameters.",
                 "operationId": "GetRecord(s)",
                 "parameters": [
@@ -28091,7 +28115,7 @@
                 "tags": [
                     "Generic"
                 ],
-                "summary": "CreateRecord(s)",
+                "summary": "Create Record(s)",
                 "description": "Records of any type can be created with the generic create record endpoint. The type of record to be created will match the 'object' path variable. The data for the record or multiple records must be passed into the body of the request.\n\n> Request body can be a single record or an array of records to be created.",
                 "operationId": "CreateRecord(s)",
                 "parameters": [
@@ -28177,7 +28201,7 @@
                 "tags": [
                     "Generic"
                 ],
-                "summary": "FetchSingleRecord",
+                "summary": "Fetch Single Record",
                 "description": "Single record can be queried from the system by passing in the name of the object as a rest parameter and query conditions can be specified with various query parameters.",
                 "operationId": "FetchSingleRecord",
                 "parameters": [
@@ -30010,7 +30034,7 @@
                 "tags": [
                     "Generic"
                 ],
-                "summary": "UpsertRecord(s)",
+                "summary": "Upsert Record(s)",
                 "description": "Records can be updated by passing in the record type and id as parameters and the fields to be updated in the body of the request.",
                 "operationId": "UpsertRecord(s)",
                 "parameters": [
@@ -30130,7 +30154,7 @@
                 "tags": [
                     "Generic"
                 ],
-                "summary": "DeleteSingleRecord",
+                "summary": "Delete Single Record",
                 "description": "Delete a single record from the server based on the object type passed as the 'object' path varible that matches the 'recordId' path variable.",
                 "operationId": "DeleteSingleRecord",
                 "parameters": [
@@ -30202,8 +30226,8 @@
                 "tags": [
                     "Generic"
                 ],
-                "summary": "DeleteMultipleRecords",
-                "description": "Multiple records can be deleted at once by passing the body of the request an array of record ids.\n\n## Request ##\nRequest body should be an array of objects containing a key with the name 'Id' and the string value for the id of the record to delete.",
+                "summary": "Delete Multiple Records",
+                "description": "Multiple records can be deleted at once by passing the body of the request an array of record ids.\n\nRequest body should be an array of objects containing a key with the name 'Id' and the string value for the id of the record to delete.",
                 "operationId": "DeleteMultipleRecords",
                 "parameters": [
                     {
@@ -30304,7 +30328,7 @@
                 "tags": [
                     "Storefront"
                 ],
-                "summary": "GetActiveStorefront",
+                "summary": "Get Active Storefront",
                 "description": "Request to get the active storefront record.",
                 "operationId": "GetActiveStorefront",
                 "parameters": [
@@ -30592,7 +30616,7 @@
                 "tags": [
                     "Checkout"
                 ],
-                "summary": "CreateOrder",
+                "summary": "Create Order",
                 "description": "Creates an order object based on the cart that matches the cartId path variable.",
                 "operationId": "CreateOrder",
                 "parameters": [
@@ -31491,8 +31515,8 @@
                 "tags": [
                     "Checkout"
                 ],
-                "summary": "CreateProposal",
-                "description": "Creates a proposal object based on the cart that matches the cartId path variable. User must pass in the editable fields of the quote object they would like to set in the body of the request.\n\n## Request\n|**Type**|**Optional**|**Description**|\n|--|--|--|\n| Apttus_Proposal__Proposal__c | No | Proposal object with the preset values to create on the server. |",
+                "summary": "Create Proposal",
+                "description": "Creates a proposal object based on the cart that matches the cartId path variable. User must pass in the editable fields of the quote object they would like to set in the body of the request.\n\n|**Type**|**Optional**|**Description**|\n|--|--|--|\n| Apttus_Proposal__Proposal__c | No | Proposal object with the preset values to create on the server. |",
                 "operationId": "CreateProposal",
                 "parameters": [
                     {
@@ -31694,7 +31718,7 @@
                 "tags": [
                     "Carts"
                 ],
-                "summary": "Clone",
+                "summary": "Clone Cart",
                 "description": "Create the clone of Main cart or active cart",
                 "operationId": "CloneCart",
                 "parameters": [
@@ -31796,7 +31820,7 @@
                 "tags": [
                     "Authentication"
                 ],
-                "summary": "GetSigningKey",
+                "summary": "Get Signing Key",
                 "description": "The /users/key endpoint is used to obtain a temporary 64 bit hexadecimal encryption key that can be used to encrypt the client credentials before obtaining an access token.",
                 "operationId": "GetSigningKey",
                 "parameters": [
@@ -31838,7 +31862,7 @@
                 "tags": [
                     "Authentication"
                 ],
-                "summary": "RevokeToken",
+                "summary": "Revoke Token",
                 "description": "Revoke an OAuth token if you don’t want an external client to access Salesforce data or if you don’t trust the client to discontinue access on its own. This will invalidate the token set to the 'token' path variable in the url.",
                 "operationId": "RevokeToken",
                 "parameters": [
@@ -31892,7 +31916,7 @@
                 "tags": [
                     "Authentication"
                 ],
-                "summary": "GetAccessToken",
+                "summary": "Get Access Token",
                 "description": "The /users/token endpoint should be used to obtain an access token for the current user. The body should contain the base64 data of the encrypted client credentials using the key obtained from the /users/key endpoint.",
                 "operationId": "GetAccessToken",
                 "parameters": [
@@ -31922,7 +31946,7 @@
                     }
                 ],
                 "requestBody": {
-                    "description": "### Building the Token Request\n#### 1. Get a temporary key\nIn order to obtain a temporary encryption key, a callout must be made to the /users/key endpoint that will return a 64-bit hexadecimal key similar to the following:\n\n    9d035a21deee3664ca5f7b8810c4251237774a6f01140d98fdadb6d214bcd3b7\n\n#### 2. Encrypt the request body using the temporary key\nOnce a key has been obtained, you can use the encryption library of your choosing to encrypt the request body with the **AES-CBC** algorithm. \n\n - Before base64 encoding the encrypted data, make sure the initialization vector used is prepended\n\nThe result of the encryption should look similar in structure to:\n\n    047v2MG4m5cxkqwIXN1po0Q8p5PTpRlm9hlTlC89jPOpjkGlL3wZ732XDPveJLUWYkrJRnzt5M2bh+IZhIn4r+BmI21xPNQCESWZMSwOPn0=\n\nThis base64 string will be used as the body of the request sent to the /users/token endpoint. Below are a couple of example using popular JavaScript frameworks:\n\n\n##### ES6 JavaScript example using native Crypto library\n\n    // First obtain a key by making an API call to /users/key\n    const key = \"9d035a21deee3664ca5f7b8810c4251237774a6f01140d98fdadb6d214bcd3b7\";\n    \n    // Initialization Vector for CBC algorithm\n    const iv = window.crypto.getRandomValues(new Uint8Array(16));\n    \n    // Raw customer credential data\n    const clientCredentials = {\n      \"username\" : \"customer@myshop.community.com\",\n      \"password\" : \"strongpassword\"\n    }\n    \n    // Supporting function to convert the hex key into an ArrayBuffer object\n    const hexToArrayBuffer = (hex) => {\n        var typedArray = new Uint8Array(hex.match(/[\\da-f]{2}/gi).map(function (h) {\n          return parseInt(h, 16)\n        }));\n        return typedArray.buffer;\n    }\n    \n    // Supporting function converts a string into an ArrayBuffer\n    const getUtf8Bytes = (str) =>\n      new Uint8Array(\n        [...unescape(encodeURIComponent(str))].map(c => c.charCodeAt(0))\n      );\n    \n    crypto.subtle.importKey(\n        \"raw\",\n        hexToArrayBuffer(key),\n        {   //this is the algorithm options\n            name: \"AES-CBC\"\n        },\n        false, //whether the key is extractable (i.e. can be used in exportKey)\n        [\"encrypt\", \"decrypt\"] // key can be used for encryption and decryption\n    )\n    .then((key) => {\n        return crypto.subtle.encrypt(\n            {\n                name: \"AES-CBC\",\n                //Don't re-use initialization vectors!\n                //Always generate a new iv every time your encrypt!\n                iv: iv,\n                length: 256\n            },\n            key, // CryptoKey object generated from hex key\n            getUtf8Bytes(JSON.stringify(clientCredentials)) // ArrayBuffer of client credentials\n        )\n    })\n    .then((encrypted) => {\n        // The result from the promise will contain encrypted customer credentials.\n        // In order to decrypt the request, the IV used must be prepended to the body\n        const requestData = btoa(String.fromCharCode(...iv) + String.fromCharCode(...new Uint8Array(encrypted)));\n        console.log(requestData);\n        // The request data can then be sent to the token endpoint in order to obtain an access token\n    });\n\n##### Example using CryptoJS\n    // First obtain a key by making an API call to /users/key\n    const key = CryptoJS.enc.Hex.parse(\"9d035a21deee3664ca5f7b8810c4251237774a6f01140d98fdadb6d214bcd3b7\");\n    \n    // Initialization Vector for CBC algorithm\n    const iv = CryptoJS.lib.WordArray.random(128/8);\n    \n    // Raw customer credential data\n    const clientCredentials = {\n      \"username\" : \"customer@myshop.community.com\",\n      \"password\" : \"strongpassword\"\n    }  \n    const encrypted = CryptoJS.AES.encrypt(JSON.stringify(clientCredentials), key, {\n      iv: iv,\n      padding: CryptoJS.pad.Pkcs7,\n      mode: CryptoJS.mode.CBC\n    });\n    \n    // The unencoded data sent to the server must contain the Initialization Vector prepended to the encrypted credentials\n    const result = btoa(atob(iv.toString(CryptoJS.enc.Base64)) + atob(encrypted.ciphertext.toString(CryptoJS.enc.Base64)));",
+                    "description": "In order to obtain a temporary encryption key, a callout must be made to the /users/key endpoint that will return a 64-bit hexadecimal key similar to the following:\n\n    9d035a21deee3664ca5f7b8810c4251237774a6f01140d98fdadb6d214bcd3b7\n\nOnce a key has been obtained, you can use the encryption library of your choosing to encrypt the request body with the **AES-CBC** algorithm. \n\n - Before base64 encoding the encrypted data, make sure the initialization vector used is prepended\n\nThe result of the encryption should look similar in structure to:\n\n    047v2MG4m5cxkqwIXN1po0Q8p5PTpRlm9hlTlC89jPOpjkGlL3wZ732XDPveJLUWYkrJRnzt5M2bh+IZhIn4r+BmI21xPNQCESWZMSwOPn0=\n\nThis base64 string will be used as the body of the request sent to the /users/token endpoint. Below are a couple of example using popular JavaScript frameworks:\n\n\n\n    // First obtain a key by making an API call to /users/key\n    const key = \"9d035a21deee3664ca5f7b8810c4251237774a6f01140d98fdadb6d214bcd3b7\";\n    \n    // Initialization Vector for CBC algorithm\n    const iv = window.crypto.getRandomValues(new Uint8Array(16));\n    \n    // Raw customer credential data\n    const clientCredentials = {\n      \"username\" : \"customer@myshop.community.com\",\n      \"password\" : \"strongpassword\"\n    }\n    \n    // Supporting function to convert the hex key into an ArrayBuffer object\n    const hexToArrayBuffer = (hex) => {\n        var typedArray = new Uint8Array(hex.match(/[\\da-f]{2}/gi).map(function (h) {\n          return parseInt(h, 16)\n        }));\n        return typedArray.buffer;\n    }\n    \n    // Supporting function converts a string into an ArrayBuffer\n    const getUtf8Bytes = (str) =>\n      new Uint8Array(\n        [...unescape(encodeURIComponent(str))].map(c => c.charCodeAt(0))\n      );\n    \n    crypto.subtle.importKey(\n        \"raw\",\n        hexToArrayBuffer(key),\n        {   //this is the algorithm options\n            name: \"AES-CBC\"\n        },\n        false, //whether the key is extractable (i.e. can be used in exportKey)\n        [\"encrypt\", \"decrypt\"] // key can be used for encryption and decryption\n    )\n    .then((key) => {\n        return crypto.subtle.encrypt(\n            {\n                name: \"AES-CBC\",\n                //Don't re-use initialization vectors!\n                //Always generate a new iv every time your encrypt!\n                iv: iv,\n                length: 256\n            },\n            key, // CryptoKey object generated from hex key\n            getUtf8Bytes(JSON.stringify(clientCredentials)) // ArrayBuffer of client credentials\n        )\n    })\n    .then((encrypted) => {\n        // The result from the promise will contain encrypted customer credentials.\n        // In order to decrypt the request, the IV used must be prepended to the body\n        const requestData = btoa(String.fromCharCode(...iv) + String.fromCharCode(...new Uint8Array(encrypted)));\n        console.log(requestData);\n        // The request data can then be sent to the token endpoint in order to obtain an access token\n    });\n\n    // First obtain a key by making an API call to /users/key\n    const key = CryptoJS.enc.Hex.parse(\"9d035a21deee3664ca5f7b8810c4251237774a6f01140d98fdadb6d214bcd3b7\");\n    \n    // Initialization Vector for CBC algorithm\n    const iv = CryptoJS.lib.WordArray.random(128/8);\n    \n    // Raw customer credential data\n    const clientCredentials = {\n      \"username\" : \"customer@myshop.community.com\",\n      \"password\" : \"strongpassword\"\n    }  \n    const encrypted = CryptoJS.AES.encrypt(JSON.stringify(clientCredentials), key, {\n      iv: iv,\n      padding: CryptoJS.pad.Pkcs7,\n      mode: CryptoJS.mode.CBC\n    });\n    \n    // The unencoded data sent to the server must contain the Initialization Vector prepended to the encrypted credentials\n    const result = btoa(atob(iv.toString(CryptoJS.enc.Base64)) + atob(encrypted.ciphertext.toString(CryptoJS.enc.Base64)));",
                     "content": {
                         "application/json": {
                             "schema": {
@@ -31971,7 +31995,7 @@
                 "tags": [
                     "Authentication"
                 ],
-                "summary": "GetActiveUser",
+                "summary": "Get Active User",
                 "description": "You can easily get the record information for the current active user by passing the 'active' parameter to the users API",
                 "operationId": "GetActiveUser",
                 "parameters": [
@@ -32269,7 +32293,7 @@
                 "tags": [
                     "Assets"
                 ],
-                "summary": "Swap",
+                "summary": "Swap Asset",
                 "operationId": "Swap",
                 "description": "Invoke this API for swapping Assets.",
                 "parameters": [
@@ -33774,11 +33798,6 @@
                             }
                         }
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "ProductRules": {
@@ -33852,11 +33871,6 @@
                     "Active": {
                         "type": "boolean"
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "Categories": {
@@ -33889,11 +33903,6 @@
                     "IsHidden": {
                         "type": "boolean"
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "CartItems": {
@@ -34002,11 +34011,6 @@
                             }
                         }
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "RemoveMultipleRecord": {
@@ -34027,11 +34031,6 @@
                     "errors": {
                         "type": "string"
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "Carts": {
@@ -34233,11 +34232,6 @@
                     "ConfigurationId": {
                         "type": "string"
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "Describe": {
@@ -34270,11 +34264,6 @@
                             }
                         }
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "Record": {
@@ -34293,11 +34282,6 @@
                             "type": "object"
                         }
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "Order": {
@@ -34372,11 +34356,6 @@
                     "BillToAccountId": {
                         "type": "string"
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "Proposal": {
@@ -34417,11 +34396,6 @@
                     "Proposal_Category": {
                         "type": "string"
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "Storefront": {
@@ -34514,11 +34488,6 @@
                     "ChannelType": {
                         "type": "string"
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "Authentication": {
@@ -34531,11 +34500,6 @@
                     "data": {
                         "type": "string"
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "AccessToken": {
@@ -34556,11 +34520,6 @@
                             }
                         }
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "ActiveUser": {
@@ -34596,11 +34555,6 @@
                             }
                         }
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "GetChildren": {
@@ -34621,11 +34575,6 @@
                             }
                         }
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "SuccessData": {
@@ -34638,11 +34587,6 @@
                     "data": {
                         "type": "boolean"
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "GetQuote": {
@@ -34693,11 +34637,6 @@
                     "OwnerId": {
                         "type": "string"
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "GetOrder": {
@@ -34746,11 +34685,6 @@
                     "OwnerId": {
                         "type": "string"
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "SwapAsset": {
@@ -34785,11 +34719,6 @@
                             }
                         }
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "TerminateAsset": {
@@ -34816,11 +34745,6 @@
                             }
                         }
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "ChangeAsset": {
@@ -34841,11 +34765,6 @@
                             }
                         }
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "Collaborationrequests": {
@@ -34899,11 +34818,6 @@
                             }
                         }
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "CartFromCollaborationrequests": {
@@ -34984,11 +34898,6 @@
                             }
                         }
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "DeleteCollaborationrequests": {
@@ -35012,11 +34921,6 @@
                             }
                         }
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             },
             "CloneCart": {
@@ -35097,11 +35001,6 @@
                             }
                         }
                     }
-                },
-                "example": {
-                    "title": "success",
-                    "status": 200,
-                    "data": {}
                 }
             }
         },
