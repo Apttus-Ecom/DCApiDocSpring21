@@ -25,6 +25,9 @@
         },
         {
             "name": "Account"
+        }, 
+        {
+            "name": "PriceList"
         },
         {
             "name": "Catalog"
@@ -1003,6 +1006,81 @@
                                         "Name": "ABC Corporation",
                                         "IsDeleted": false,
                                         "Id": "0011900000hnGsrAAE"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/pricelists/active": {
+            "get": {
+                "tags": [
+                    "PriceList"
+                ],
+                "summary": "Get Active PriceList",
+                "description": "The following request will return the current active pricelist",
+                "operationId": "GetActivePricelist",
+                "parameters": [
+                    {
+                        "name": "x-storefront",
+                        "in": "header",
+                        "description": "The name of the storefront being used for the request.",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "ECommerce"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content type of the request body.",
+                        "required": true,
+                        "style": "simple",
+                        "explode": false,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Pricelist"
+                                },
+                                "example": {
+                                    "title": "success",
+                                    "status": 200,
+                                    "data": {
+                                        "attributes": {
+                                            "type": "Apttus_Config2__PriceList__c",
+                                            "url": "/services/data/v53.0/sobjects/Apttus_Config2__PriceList__c/a171T000005il1XQAQ"
+                                        },
+                                        "Id": "a171T000005il1XQAQ",
+                                        "OwnerId": "00550000000vtlpAAA",
+                                        "IsDeleted": false,
+                                        "Name": "Tier 1 Hardware & Software",
+                                        "CurrencyIsoCode": "USD",
+                                        "CreatedDate": "2019-05-08T11:14:39.000+0000",
+                                        "CreatedById": "00550000000vtlpAAA",
+                                        "LastModifiedDate": "2021-08-17T10:01:54.000+0000",
+                                        "LastModifiedById": "00550000000vtlpAAA",
+                                        "SystemModstamp": "2021-08-17T10:01:54.000+0000",
+                                        "Apttus_Config2__Active__c": true,
+                                        "Apttus_Config2__EffectiveDate__c": "2018-10-31T08:22:00.000+0000",
+                                        "Apttus_Config2__GuidePage__c": "APTPSGuidedSelling",
+                                        "Apttus_Config2__Type__c": "Contract",
+                                        "Apttus_Config2__DisableBasedOnCurrencyAdjustment__c": false,
+                                        "APTS_Ext_ID__c": "a171T000005il1XQAQ"
                                     }
                                 }
                             }
@@ -15671,31 +15749,18 @@
                     "Carts"
                 ],
                 "summary": "Clone Cart",
-                "description": "Create the clone of Main cart or active cart",
+                "description": "Clone Cart API clones the cart along with Line Items, Constraint Rule Info, Collaboration request and other details. It sets the newly created cart to active.",
                 "operationId": "CloneCart",
                 "parameters": [
                     {
-                        "name": "alias",
-                        "in": "query",
-                        "description": "The namespace for the fields will be prefixed if set to false. By default it is true.",
-                        "required": false,
-                        "style": "form",
-                        "explode": true,
-                        "schema": {
-                            "type": "boolean",
-                            "example": false
-                        }
-                    },
-                    {
                         "name": "cartId",
                         "in": "path",
-                        "description": "The reference to the cart or 'active' for the current active cart.",
+                        "description": "The reference Id of the cart that needsto be cloned",
                         "required": true,
                         "style": "simple",
-                        "explode": false,
                         "schema": {
                             "type": "string",
-                            "example": "a1I3I000000e7GLUAY"
+                            "example": "a1I3I000000zQUqUAM"
                         }
                     },
                     {
@@ -15704,22 +15769,9 @@
                         "description": "The name of the storefront being used for the request.",
                         "required": true,
                         "style": "simple",
-                        "explode": false,
                         "schema": {
                             "type": "string",
                             "example": "ECommerce"
-                        }
-                    },
-                    {
-                        "name": "x-account",
-                        "in": "header",
-                        "description": "The account value from header will be taken as default account for proposal account property, also for  properties like ShipTo,SoldTo only when the value of these properties are null.",
-                        "required": false,
-                        "style": "simple",
-                        "explode": false,
-                        "schema": {
-                            "type": "string",
-                            "example": "0011900000hnGsr"
                         }
                     },
                     {
@@ -15728,7 +15780,6 @@
                         "description": "Content type of the request body.",
                         "required": true,
                         "style": "simple",
-                        "explode": false,
                         "schema": {
                             "type": "string",
                             "example": "application/json"
@@ -15738,40 +15789,49 @@
                 "responses": {
                     "200": {
                         "description": "OK",
+                        "headers": {},
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/CloneCart"
+                                    "$ref": "#/components/schemas/CreateCart"
                                 },
                                 "example": {
-                                    "title": "success",
-                                    "status": 200,
-                                    "data": {
-                                        "ParentConfigurationId": "a1I2h000000CQOlEAO",
-                                        "BusinessObjectProfile": "Regular",
-                                        "IsValidationPending": false,
-                                        "IsTaskPending": false,
-                                        "CollaborationRequestId": "a3K2h0000002MA4EAM",
-                                        "BusinessObjectRefId": "a3K2h0000002MA4EAM",
-                                        "ShipToAccountId": "0011900000hnGsrAAE",
-                                        "BillToAccountId": "0011900000hnGsrAAE",
-                                        "EffectivePriceListId": "a171T000005il1XQAQ",
-                                        "NumberOfItems": 0,
-                                        "BaseRelationCount": 0,
-                                        "SummaryGroupType": "Category",
-                                        "Status": "Saved",
-                                        "PriceListId": "a171T000005il1XQAQ",
-                                        "IsTransient": true,
-                                        "IsPricePending": false,
-                                        "BusinessObjectType": "Digital Commerce",
-                                        "BusinessObjectId": "a3K2h0000002MA4EAM",
-                                        "AccountId": "0011900000hnGsrAAE",
-                                        "Name": "cart oct21",
-                                        "IsDeleted": false,
-                                        "OwnerId": "00519000002i3UzAAI",
-                                        "Id": "a1I2h000000CQOqEAO"
+                                    "title":"success",
+                                    "status":200,
+                                    "data":{
+                                        "UseType":"Main",
+                                        "ParentConfigurationId":"a1I3I000000zQUqUAM",
+                                        "BusinessObjectProfile":"Regular",
+                                        "IsValidationPending":false,
+                                        "IsTaskPending":false,
+                                        "ShipToAccountId":"0013I00000gsIoRQAU",
+                                        "CartDataCache":"{\n  \"usePriceEscalators\" : false,\n  \"useFormulaPricing\" : false,\n  \"useBasicTotaling\" : false,\n  \"splitCartThreshold\" : null,\n  \"splitCartCriteriaFields\" : null,\n  \"priceInErrorLineNumbers\" : null,\n  \"priceCompletedLineNumbers\" : null,\n  \"priceCompletedChunkLineNumbers\" : null,\n  \"pendingDepItemKeys\" : [ ],\n  \"lastIndex\" : 0,\n  \"lastChunkItemSequence\" : null,\n  \"IsProductGroupEnabled\" : false,\n  \"IsProductFamilyEnabled\" : false,\n  \"isPrestoCallPending\" : null,\n  \"isPrePricingStepPending\" : null,\n  \"isPostPricingStepPending\" : null,\n  \"IsOptionPricePending\" : false,\n  \"IsEmpty\" : false,\n  \"IsCustomGroupEnabled\" : false,\n  \"idxCType\" : { },\n  \"DependentItemKeyMap\" : { },\n  \"currAdHocGrouByField\" : null,\n  \"cTypeIdx\" : { },\n  \"couponUsage\" : { },\n  \"couponCodes\" : [ ],\n  \"chunkBundleLineNumber\" : null\n}",
+                                        "BillToAccountId":"0013I00000gsIoRQAU",
+                                        "EffectivePriceListId":"a171T000005il1XQAQ",
+                                        "NumberOfItems":2,
+                                        "BaseRelationCount":0,
+                                        "SummaryGroupType":"Category",
+                                        "Status":"New",
+                                        "PriceListId":"a171T000005il1XQAQ",
+                                        "IsTransient":true,
+                                        "IsPricePending":false,
+                                        "EffectiveDate":"2021-10-08T11:38:41.000Z",
+                                        "BusinessObjectType":"Agreement",
+                                        "AccountId":"0013I00000gsIoRQAU",
+                                        "LastReferencedDate":"2021-10-08T11:38:42.000Z",
+                                        "LastViewedDate":"2021-10-08T11:38:42.000Z",
+                                        "SystemModstamp":"2021-10-08T11:38:42.000Z",
+                                        "LastModifiedById":"00519000002i3WMAAY",
+                                        "LastModifiedDate":"2021-10-08T11:38:42.000Z",
+                                        "CreatedById":"00519000002i3WMAAY",
+                                        "CreatedDate":"2021-10-08T11:38:42.000Z",
+                                        "CurrencyIsoCode":"USD",
+                                        "Name":"CV_02_Cart_Cloned",
+                                        "IsDeleted":false,
+                                        "OwnerId":"00519000002i3WMAAY",
+                                        "Id":"a1I3I000000zvLXUAY"
+                                        }
                                     }
-                                }
                             }
                         }
                     }
@@ -16355,7 +16415,7 @@
                     {
                         "name": "price",
                         "in": "query",
-                        "description": "The pricing strategy to use. 'default' | 'async' |'turbo' | 'skip'",
+                        "description": "The pricing strategy to use. 'default' | 'async' | 'skip'",
                         "required": true,
                         "style": "form",
                         "explode": true,
@@ -17998,7 +18058,7 @@
                     {
                         "name": "price",
                         "in": "query",
-                        "description": "The pricing strategy to use. 'default' | 'async' | 'turbo' | 'skip'",
+                        "description": "The pricing strategy to use. 'default' | 'async' | 'skip'",
                         "required": true,
                         "style": "form",
                         "explode": true,
@@ -20748,7 +20808,7 @@
                     {
                         "name": "rule",
                         "in": "query",
-                        "description": "The rule strategy to use. 'default' | 'async' | 'turbo' | 'skip'",
+                        "description": "The rule strategy to use. 'default' | 'async' | 'skip'",
                         "required": true,
                         "style": "form",
                         "explode": true,
@@ -23931,7 +23991,7 @@
                     {
                         "name": "price",
                         "in": "query",
-                        "description": "The pricing strategy to use. 'default' | 'async' |  'turbo' | 'skip'",
+                        "description": "The pricing strategy to use. 'default' | 'async' |  'skip'",
                         "required": true,
                         "style": "form",
                         "explode": true,
@@ -23943,7 +24003,7 @@
                     {
                         "name": "rule",
                         "in": "query",
-                        "description": "The rule strategy to use. 'default' | 'async' | 'turbo' | 'skip'",
+                        "description": "The rule strategy to use. 'default' | 'async' | 'skip'",
                         "required": true,
                         "style": "form",
                         "explode": true,
@@ -35833,6 +35893,27 @@
                         "type": "string"
                     },
                     "Name": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Pricelist": {
+                "title": "Pricelist",
+                "type": "object",
+                "properties": {
+                    "Name": {
+                        "type": "string"
+                    },
+                    "Id": {
+                        "type": "string"
+                    },
+                    "OwnerId": {
+                        "type": "string"
+                    },
+                    "CurrencyIsoCode": {
+                        "type": "string"
+                    },
+                    "Apttus_Config2__Active__c": {
                         "type": "string"
                     }
                 }
