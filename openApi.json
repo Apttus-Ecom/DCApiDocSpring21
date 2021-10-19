@@ -15755,7 +15755,7 @@
                     {
                         "name": "cartId",
                         "in": "path",
-                        "description": "The reference Id of the cart that needsto be cloned",
+                        "description": "The reference Id of the cart that needs to be cloned",
                         "required": true,
                         "style": "simple",
                         "schema": {
